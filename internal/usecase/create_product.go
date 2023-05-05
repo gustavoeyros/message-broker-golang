@@ -17,6 +17,12 @@ type CreateProductUseCase struct {
 	ProductRepository entities.ProductRepository
 }
 
+func NewCreateProductUseCase(productRepository entities.ProductRepository) *CreateProductUseCase {
+	return &CreateProductUseCase{
+		ProductRepository: productRepository,
+	}
+}
+
 func (u *CreateProductUseCase) Execute(input CreateProductInputDto) (*CreateProductOutputDto, error) {
 	product := entities.NewProduct(input.Name, input.Price)
 	err := u.ProductRepository.Create(product)
